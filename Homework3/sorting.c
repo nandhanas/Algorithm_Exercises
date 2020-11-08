@@ -180,24 +180,24 @@ int getMax (int arr[], int n){
 void radixSort (int arr[], int n){
    int bucket[10][10], bucket_cnt[10];
    int i, j, k, r, NOP = 0, divisor = 1, lar, pass;
-   lar = getMax (arr, n);
+   lar = getMax (arr, n); //Finding the maximum to find the no of digits
    while (lar > 0){
       NOP++;
       lar /= 10;
-   }
+   } //Finding the number of digits
    for (pass = 0; pass < NOP; pass++){
-      for (i = 0; i < 10; i++){
+      for (i = 0; i < 10; i++){ //10 is the number of digits 0-9
          bucket_cnt[i] = 0;
       }
       for (i = 0; i < n; i++){
          r = (arr[i] / divisor) % 10;
          bucket[r][bucket_cnt[r]] = arr[i];
-         bucket_cnt[r] += 1;
+         bucket_cnt[r] += 1; //Finding the count of digits in each position
       }
       i = 0;
       for (k = 0; k < 10; k++){
          for (j = 0; j < bucket_cnt[k]; j++){
-            arr[i] = bucket[k][j];
+            arr[i] = bucket[k][j];  //Storing the sorted array in the input array
             i++;
          }
       }
@@ -231,7 +231,7 @@ int compareIntegers(const void* first, const void* second)
 
 void bucketSort(int array[],int n)
 {
-    struct bucket buckets[3];
+    struct bucket buckets[3]; //Empty buckets
     int i, j, k;
     for (i = 0; i < 3; i++)
     {
@@ -243,15 +243,15 @@ void bucketSort(int array[],int n)
     {
         if (array[i] < 0)
         {
-            buckets[0].value[buckets[0].count++] = array[i];
+            buckets[0].value[buckets[0].count++] = array[i]; //storing values less than 10
         }
         else if (array[i] > 10)
         {
-            buckets[2].value[buckets[2].count++] = array[i];
+            buckets[2].value[buckets[2].count++] = array[i]; //storing values greater than 10
         }
         else
         {
-            buckets[1].value[buckets[1].count++] = array[i];
+            buckets[1].value[buckets[1].count++] = array[i]; //storing values between 0 and 10
         }
     }
     for (k = 0, i = 0; i < 3; i++)
@@ -260,7 +260,7 @@ void bucketSort(int array[],int n)
         qsort(buckets[i].value, buckets[i].count, sizeof(int), &compareIntegers);
         for (j = 0; j < buckets[i].count; j++)
         {
-            array[k + j] = buckets[i].value[j];
+            array[k + j] = buckets[i].value[j]; //Combining the sorted elements together
         }
         k += buckets[i].count;
         free(buckets[i].value);
